@@ -18,5 +18,6 @@ s! {
 }
 
 extern {
-    pub fn pthread_set_name_np(tid: ::pthread_t, name: *const ::c_char);
+    pub fn pthread_setname_np(tid: ::pthread_t, name: *const ::c_char,
+                              arg: *mut ::c_void);
 }
