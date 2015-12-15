@@ -105,7 +105,7 @@ cfg_if! {
     } else if #[cfg(target_env = "musl")] {
         #[link(name = "c", kind = "static")]
         extern {}
-    } else if #[cfg(target_env = "asmjs")] {
+    } else if #[cfg(target_os = "emscripten")] {
         #[link(name = "c")]
         extern {}
     } else if #[cfg(any(target_os = "macos",
@@ -583,7 +583,9 @@ extern {
 }
 
 cfg_if! {
-    if #[cfg(any(target_os = "linux", target_os = "android"))] {
+    if #[cfg(any(target_os = "linux",
+                 target_os = "android",
+                 target_os = "emscripten"))] {
         mod notbsd;
         pub use self::notbsd::*;
     } else if #[cfg(any(target_os = "macos",
